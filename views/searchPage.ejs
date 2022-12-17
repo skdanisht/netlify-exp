@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dtanind is a search engine like Google, Bing, Yahoo...">
+    <meta name="author" content="Dtanind">
+    <meta name="keywords" content="Search Engine">
+    <title>
+        <%= q %>
+    </title>
+</head>
+
+<body>
+    <style>
+        @media screen and (min-width: 401px) {
+            .inputWrapper {
+                margin-left: -30px;
+            }
+
+            .result {
+                padding-inline: 9vw 20px;
+                max-width: 70vw;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .inputWrapper {
+                margin-left: -3vw;
+            }
+
+            .result {
+                padding-inline: 6px 0px;
+                max-width: 80vw;
+            }
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        .inputWrapper {
+            display: flex;
+            align-items: center;
+            margin-top: 50px;
+            width: 100vw;
+            justify-content: center;
+        }
+
+        .bar {
+            height: 45px;
+            border: none;
+            width: 60vw;
+            max-width: 460px;
+            border-radius: 100px;
+            font-size: 16px;
+            display: flex;
+            outline: none;
+            padding-inline: 52px 52px;
+            align-items: center;
+            flex-direction: row;
+            box-shadow: 0px 0px 8px 1px #dcdcdc;
+        }
+
+        .bar:hover {
+            box-shadow: 1px 1px 20px 3px #dcdcdc;
+        }
+
+        .bar:focus-within {
+            box-shadow: 1px 1px 20px 3px #dcdcdc;
+            outline: none;
+        }
+
+        .searchIcon {
+            min-width: 46px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            border: none;
+            position: relative;
+            left: 46px;
+        }
+
+        .voiceBtn {
+            border: none;
+            background-color: transparent;
+            border-radius: 100px;
+            right: 46px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .voice {
+            height: 30px;
+        }
+
+        .result {
+            font-family: arial, sans-serif;
+        }
+
+        /* clears the ‘X’ from Internet Explorer */
+        input[type=search]::-ms-clear {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        input[type=search]::-ms-reveal {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        /* clears the ‘X’ from Chrome */
+        input[type="search"]::-webkit-search-decoration,
+        input[type="search"]::-webkit-search-cancel-button,
+        input[type="search"]::-webkit-search-results-button,
+        input[type="search"]::-webkit-search-results-decoration {
+            display: none;
+        }
+    </style>
+    <script>
+        addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            var query = document.forms['form']['input'].value;
+
+            const q = encodeURIComponent(query).replace(/%20/g, "+");
+
+            window.location.href = `/search?q=${q}`
+            document.forms['form']['input'].value = q
+
+        });
+    </script>
+    <div class="inputWrapper">
+        <button class="searchIcon" aria-label="searchIcon">
+            <svg viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                enable-background="new 0 0 512 512">
+                <path
+                    d="M448.3 424.7 335 311.3c20.8-26 33.3-59.1 33.3-95.1 0-84.1-68.1-152.2-152-152.2-84 0-152 68.2-152 152.2s68.1 152.2 152 152.2c36.2 0 69.4-12.7 95.5-33.8L425 448l23.3-23.3zM120.1 312.6c-25.7-25.7-39.8-59.9-39.8-96.3s14.2-70.6 39.8-96.3 59.9-40 96.2-40c36.3 0 70.5 14.2 96.2 39.9s39.8 59.9 39.8 96.3-14.2 70.6-39.8 96.3c-25.7 25.7-59.9 39.9-96.2 39.9-36.3.1-70.5-14.1-96.2-39.8z"
+                    fill="#7300ff" class="fill-000000"></path>
+            </svg>
+        </button>
+        <form class="form" name="form" onsubmit="event.preventDefault();" style="display:flex;">
+            <input class="bar" name="input" type="text" autocomplete="off" value="<%= q %>"
+                placeholder="Search Dtanind" style="flex:1;">
+        </form>
+        <button class="voiceBtn" aria-label="voiceBtn">
+            <svg class="voice" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                enable-background="new 0 0 512 512">
+                <path
+                    d="M256 32c-43.7 0-79 37.5-79 83.5V270c0 46 35.3 83.5 79 83.5s79-37.5 79-83.5V115.5c0-46-35.3-83.5-79-83.5zm63 238c0 37.2-28.3 67.5-63 67.5s-63-30.3-63-67.5V115.5c0-37.2 28.3-67.5 63-67.5s63 30.3 63 67.5V270z"
+                    fill="#7300ff" class="fill-000000"></path>
+                <path
+                    d="M367 192v79.7c0 60.2-49.8 109.2-110 109.2s-110-49-110-109.2V192h-19v79.7c0 67.2 53 122.6 120 127.5V462h-73v18h161v-18h-69v-62.8c66-4.9 117-60.3 117-127.5V192h-17z"
+                    fill="#7300ff" class="fill-000000"></path>
+            </svg>
+        </button>
+    </div>
+    <div style="
+    display: flex;
+    justify-content: space-evenly;
+    ">
+        <p>hello</p>
+        <p>hello</p>
+        <p>abcd</p>
+    </div>
+    <div class="result">
+        <% for (i=0; i < data.length; i++) {%>
+            <div style="padding-inline:20px;">
+                <div>
+                    <% url = "http://localhost:8000/redirectTo?url=".concat(data[i].link) %>
+                    <a target="_blank" href="<%= url %>" style="text-decoration:none">
+                        <div>
+                            <p style="font-size: 14px;color: #202124;margin-bottom: 3px;overflow-wrap: break-word;letter-spacing: 0.1px;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;-webkit-line-clamp: 3;">
+                                <%=
+                                    data[i].link.replaceAll(".html","").replace('https://','').replace('http://','').split('/').filter((el)=>
+                                    {
+                                    return el != '';
+                                    }).join(' > ')%>
+                            </p>
+                        </div>
+                        <h3 style="
+                            color: #1a0dab;
+                            font-size: 20px;
+                            font-weight: 400;
+                            padding: 5px 0px 3px;
+                            margin-bottom: 3px;
+                            margin-top: 0px;
+                            overflow-wrap: break-word;">
+                            <%= data[i].title %>
+                        </h3>
+                    </a>
+                </div>
+                <p style="font-size: 14px; color: #70757a; margin-top: 8px;overflow-wrap: break-word;    display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;    -webkit-line-clamp: 3;">
+                    <%= data[i].snippet %>
+                </p>
+            </div>
+            <% } %>
+    </div>
+</body>
+
+</html>
